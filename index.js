@@ -29,6 +29,10 @@ pg.defaults.ssl = false;
 
 var app = express();
 app.set('port', (process.env.PORT || 443));
+app.get('/', function (req, res) {
+   res.send('Hello World');
+})
+/*
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.set('views', __dirname + '/views');
@@ -202,3 +206,4 @@ function verifyRequestSignature(req, res, buf) {
 		}
 	}
 }
+*/
