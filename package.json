@@ -16,10 +16,6 @@
     "body-parser": "^1.15.0",
     "request": "^2.79.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/techmurphy/bot"
-  },  
   "author": "Facebook Inc.",
   "license": "See LICENSE file.",
   "private": true
