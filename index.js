@@ -28,10 +28,11 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 pg.defaults.ssl = false;
 
 var app = express();
-app.set('port', (process.env.PORT || 80));
-app.get('/', function (request, response) {
-  response.send('Hello World!')
-})
+app.set('port', process.env.PORT || 3000);
+
+app.get('/', function(req, res){
+    res.send('hello world');
+});
 
 /*
 app.use(express.static(__dirname + '/public'));
