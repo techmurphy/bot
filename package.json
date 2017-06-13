@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A sample bot for Workplace",
   "engines": {
-    "node": "6.10.2"
+    "node": "6.10.0"
   },
   "main": "index.js",
   "scripts": {
