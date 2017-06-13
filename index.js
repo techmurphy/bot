@@ -29,15 +29,16 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 
 var app = express();
 app.set('port', (process.env.PORT || 80));
-app.get('/', function (req, res) {
-   res.send('Hello World');
-})
-/*
+//app.get('/', function (req, res) {
+//   res.send('Hello World');
+//})
+
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+/*
 // List out all the thanks recorded in the database
 app.get('/', function (request, response) {
 	pg.connect(DATABASE_URL, function(err, client, done) {
