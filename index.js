@@ -25,7 +25,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	process.exit(1);
 }
 
-pg.defaults.ssl = true;
+pg.defaults.ssl = false;
 
 var app = express();
 app.set('port', (process.env.PORT || 5000));
