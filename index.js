@@ -11,7 +11,7 @@ const
 	crypto = require('crypto'),
 	express = require('express'),
 	bodyParser = require('body-parser'),
-	pg = require('pg'),
+	//pg = require('pg'),
 	request = require('request');
 
 const
@@ -25,7 +25,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	process.exit(1);
 }
 
-pg.defaults.ssl = true;
+//pg.defaults.ssl = true;
 
 var app = express();
 app.set('port', process.env.PORT || 3000);
@@ -42,18 +42,55 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 // List out all the thanks recorded in the database
+var Connection = require('tedious').Connection;
+var Request = require('tedious').Request;
+
+// Create connection to database
+var config = {
+  userName: 'nrc',
+  password: 'Admin150!',
+  server: 'nrc-db.database.windows.net',
+  options: {
+      database: 'CustomUserRegistration_db'
+  }
+}
+var connection = new Connection(config);
+
 app.get('/', function (request, response) {
-	pg.connect(DATABASE_URL, function(err, client, done) {
-		client.query('SELECT * FROM thanks', function(err, result) {
-			done();
-			if (err) { 
+// Attempt to connect and execute queries if connection goes through
+connection.on('connect', function(err) {
+    if (err) {
+        console.log(err)
+    }
+    else{
+        queryDatabase()
+    }
+});
+});
+
+function queryDatabase(){
+    console.log('Reading rows from the Table...');
+
+    // Read all rows from table
+    request = new Request(
+        "SELECT * FROM thanks",
+        function(err, rowCount, rows) {
+		if (err) { 
 				console.error(err); response.send('Error ' + err);
 			} else {
+				console.log(rowCount + ' row(s) returned');
 				response.render('pages/thanks', {results: result.rows} ); 
-			}
-		});
-	});
-});
+			}     
+        }
+    );
+
+    request.on('row', function(columns) {
+        columns.forEach(function(column) {
+            console.log("%s\t%s", column.metadata.colName, column.value);
+        });
+    });
+    connection.execSql(request);
+}
 
 // Handle the webhook subscription request from Facebook
 app.get('/webhook', function(request, response) {
