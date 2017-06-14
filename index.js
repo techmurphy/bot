@@ -27,9 +27,9 @@ app.set('port', process.env.PORT || 3000);
 //});
 
 
-app.use(express.static(__dirname + '\/public'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
-app.set('views', __dirname + '\/views');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
 // List out all the thanks recorded in the database
@@ -66,7 +66,7 @@ console.log('Reading rows from the Table...');
 				console.error(err); response.send('Error ' + err);
 			} else {
 				console.log(rowCount + ' row(s) returned');
-				response.render('pages\/thanks', {results: rows} ); 
+				response.render('pages/thanks.ejs', {results: rows} ); 
 			}     
         }
     );
