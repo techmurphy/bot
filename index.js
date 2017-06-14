@@ -66,7 +66,7 @@ connection.on('connect', function(err) {
         console.log(err);
     }
     else{
-|console.log('Reading rows from the Table...');
+console.log('Reading rows from the Table...');
 
     // Read all rows from table
     var request = new Request(
