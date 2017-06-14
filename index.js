@@ -13,6 +13,7 @@ const
 	bodyParser = require('body-parser'),
 	//pg = require('pg'),
 	request = require('request');
+	tedious = require('tedious');
 
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
