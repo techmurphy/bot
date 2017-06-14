@@ -25,13 +25,14 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	process.exit(1);
 }
 
-pg.defaults.ssl = false;
+pg.defaults.ssl = true;
 
 var app = express();
 app.set('port', process.env.PORT || 3000);
 
-app.get('/', function(req, res){
-    res.send('hello world');
+app.get('/', function(request, response) {
+  var data = fs.readFileSync('index.html').toString();
+  response.send(data);
 });
 
 /*
@@ -40,7 +41,14 @@ app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-/*
+
+app.get('/', function (request, response) {
+				response.render('pages/thanks'); 
+			}
+		});
+	});
+});
+
 // List out all the thanks recorded in the database
 app.get('/', function (request, response) {
 	pg.connect(DATABASE_URL, function(err, client, done) {
