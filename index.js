@@ -86,12 +86,13 @@ function queryDatabase(){
 			}     
         }
     );
-
+console.log('Trace1');
     request.on('row', function(columns) {
         columns.forEach(function(column) {
             console.log("%s\t%s", column.metadata.colName, column.value);
         });
     });
+	console.log('Trace2');
     connection.execSql(request);
 }
 
