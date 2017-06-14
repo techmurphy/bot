@@ -13,7 +13,7 @@ const
 	bodyParser = require('body-parser'),
 	//pg = require('pg'),
 	request = require('request');
-	tedious = require('tedious');
+	
 
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
@@ -43,6 +43,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 // List out all the thanks recorded in the database
+//tedious = require('tedious');
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 
