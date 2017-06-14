@@ -30,24 +30,16 @@ pg.defaults.ssl = true;
 var app = express();
 app.set('port', process.env.PORT || 3000);
 
-app.get('/', function(request, response) {
-  var data = fs.readFileSync('index.html').toString();
-  response.send(data);
-});
+//app.get('/', function(request, response) {
+//  var data = fs.readFileSync('index.html').toString();
+//  response.send(data);
+//});
 
-/*
+
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-
-
-app.get('/', function (request, response) {
-				response.render('pages/thanks'); 
-			}
-		});
-	});
-});
 
 // List out all the thanks recorded in the database
 app.get('/', function (request, response) {
@@ -217,4 +209,3 @@ function verifyRequestSignature(req, res, buf) {
 		}
 	}
 }
-*/
