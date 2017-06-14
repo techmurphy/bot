@@ -54,7 +54,8 @@ var config = {
   server: 'nrc-db.database.windows.net',
   options: {
       database: 'CustomUserRegistration_db',
-      encrypt: 'true'
+      encrypt: 'true',
+      rowCollectionOnDone: 'true
   }
 }
 var connection = new Connection(config);
@@ -76,8 +77,7 @@ function queryDatabase(){
 
     // Read all rows from table
     var request = new Request(
-        "SELECT * FROM thanks",
-        function(err, rowCount, rows) {
+        "SELECT * FROM thanks", function(err, rowCount, rows) {
 		if (err) { 
 				console.error(err); response.send('Error ' + err);
 			} else {
