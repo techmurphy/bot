@@ -75,7 +75,7 @@ function queryDatabase(){
     console.log('Reading rows from the Table...');
 
     // Read all rows from table
-    request = new Request(
+    var request = new Request(
         "SELECT * FROM thanks",
         function(err, rowCount, rows) {
 		if (err) { 
