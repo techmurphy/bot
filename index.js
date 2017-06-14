@@ -14,8 +14,6 @@ const
 	//pg = require('pg'),
 	request = require('request'),
 	response =  require('response');
-	
-
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
 	ACCESS_TOKEN = process.env.ACCESS_TOKEN,
@@ -83,7 +81,7 @@ function queryDatabase(){
 				console.error(err); response.send('Error ' + err);
 			} else {
 				console.log(rowCount + ' row(s) returned');
-				response.render('pages/thanks', {results: results.rows} ); 
+				response.render('pages/thanks', {results: rows} ); 
 			}     
         }
     );
