@@ -51,6 +51,7 @@ var config = {
   userName: 'nrc',
   password: 'Admin150!',
   server: 'nrc-db.database.windows.net',
+  encrypt: 'true',
   options: {
       database: 'CustomUserRegistration_db'
   }
