@@ -66,13 +66,7 @@ connection.on('connect', function(err) {
         console.log(err);
     }
     else{
-        queryDatabase();
-    }
-});
-});
-
-function queryDatabase(){
-    console.log('Reading rows from the Table...');
+|console.log('Reading rows from the Table...');
 
     // Read all rows from table
     var request = new Request(
@@ -93,7 +87,11 @@ console.log('Trace1');
     });
 	console.log('Trace2');
     connection.execSql(request);
-}
+	
+    }
+});
+});
+
 
 // Handle the webhook subscription request from Facebook
 app.get('/webhook', function(request, response) {
