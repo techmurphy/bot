@@ -103,7 +103,7 @@ app.get('/webhook', function(request, response) {
 		response.sendStatus(403);          
 	}
 });
-
+/*
 // Handle webhook payloads from Facebook
 app.post('/webhook', function(request, response) {
 	if(request.body && request.body.entry) {
@@ -214,6 +214,7 @@ app.post('/webhook', function(request, response) {
 		});
 	}
 });
+*/
 
 app.listen(app.get('port'), function() {
 	console.log('Node app is running on port', app.get('port'));
