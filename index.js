@@ -63,10 +63,10 @@ app.get('/', function (request, response) {
 // Attempt to connect and execute queries if connection goes through
 connection.on('connect', function(err) {
     if (err) {
-        console.log(err)
+        console.log(err);
     }
     else{
-        queryDatabase()
+        queryDatabase();
     }
 });
 });
