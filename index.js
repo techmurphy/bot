@@ -91,6 +91,7 @@ app.get('/webhook', function(request, response) {
 		console.log('Validated webhook');
 		response.status(200).send(request.query['hub.challenge']);
 	} else {
+		console.log('INside else');
 		console.error('Failed validation. Make sure the validation tokens match.');
 		response.sendStatus(403);          
 	}
