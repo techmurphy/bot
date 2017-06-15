@@ -68,9 +68,9 @@ console.log('Reading rows from the Table...');
 				
 			} else {
 				console.log(rowCount + ' row(s) returned');
-				.on('doneInProc',function(rowCount, more, rows){
+				request.on('doneInProc',function(rowCount, more, rows){
         			console.log(rows); // not empty
-				response.render('pages/thanks.ejs', {results: rows} ); 
+				response.render('pages/thanks.ejs', {results: rows} ); });
 			}     
         }
     );
