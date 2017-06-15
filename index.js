@@ -97,7 +97,6 @@ app.get('/webhook', function(request, response) {
 		console.error('Failed validation. Make sure the validation tokens match.');
 		response.sendStatus(403);          
 	}
-	console.log('skipped if');
 });
 
 // Handle webhook payloads from Facebook
@@ -105,6 +104,7 @@ app.post('/webhook', function(request, response) {
 	if(request.body && request.body.entry) {
 		request.body.entry.forEach(function(entry){
 			entry.changes.forEach(function(change){
+	console.log('trace1');
 				if(change.field === 'mention') {
 					let mention_id = (change.value.item === 'comment') ? 
 						change.value.comment_id : change.value.post_id;
