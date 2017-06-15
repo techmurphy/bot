@@ -83,7 +83,7 @@ console.log('Trace1');
 });
 });
 
-
+console.log('Validating webhook');
 // Handle the webhook subscription request from Facebook
 app.get('/webhook', function(request, response) {
 	if (request.query['hub.mode'] === 'subscribe' &&
