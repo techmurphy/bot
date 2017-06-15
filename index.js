@@ -45,8 +45,8 @@ var config = {
   options: {
       database: 'CustomUserRegistration_db',
       encrypt: true,
-      //rowCollectionOnDone: true,
-      rowCollectionOnRequestCompletion: true
+      rowCollectionOnDone: true
+      //rowCollectionOnRequestCompletion: true
   }
 }
 var connection = new Connection(config);
@@ -62,13 +62,15 @@ console.log('Reading rows from the Table...');
 
     // Read all rows from table
     var request = new Request(
-        "SELECT * FROM thanks", function(err, rowCount, row) {
+        "SELECT * FROM thanks", function(err, rowCount, rows) {
 		if (err) { 
 				console.error(err); response.send('Error ' + err);
+				
 			} else {
 				console.log(rowCount + ' row(s) returned');
-				console.log(rows.permalink_url + ' returned');
-				response.render('pages/thanks.ejs', {results: row} ); 
+				.on('doneInProc',function(rowCount, more, rows){
+        			console.log(rows); // not empty
+				response.render('pages/thanks.ejs', {results: rows} ); 
 			}     
         }
     );
