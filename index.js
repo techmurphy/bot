@@ -3,7 +3,7 @@ const
 	express = require('express'),
 	bodyParser = require('body-parser'),
 	//pg = require('pg'),
-	//request = require('request'),
+	request = require('request'),
 	response =  require('response');
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
