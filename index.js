@@ -44,8 +44,9 @@ var config = {
   server: 'nrc-db.database.windows.net',
   options: {
       database: 'CustomUserRegistration_db',
-      encrypt: 'true',
-      rowCollectionOnRequestCompletion: 'true'
+      encrypt: true,
+      rowCollectionOnDone: false,
+      rowCollectionOnRequestCompletion: false
   }
 }
 var connection = new Connection(config);
