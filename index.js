@@ -15,7 +15,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	console.error('Missing environment values.');
 	process.exit(1);
 }
-
+console.log(' the verify token is '+VERIFY_TOKEN);
 //pg.defaults.ssl = true;
 
 var app = express();
