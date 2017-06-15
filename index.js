@@ -70,7 +70,6 @@ console.log('Reading rows from the Table...');
 			}     
         }
     );
-console.log('Trace1');
     request.on('row', function(columns) {
         columns.forEach(function(column) {
             console.log("%s\t%s", column.metadata.colName, column.value);
@@ -104,7 +103,7 @@ app.post('/webhook', function(request, response) {
 	if(request.body && request.body.entry) {
 		request.body.entry.forEach(function(entry){
 			entry.changes.forEach(function(change){
-	console.log('trace1');
+	console.log('handle webhook trace1'+change.field);
 				if(change.field === 'mention') {
 					let mention_id = (change.value.item === 'comment') ? 
 						change.value.comment_id : change.value.post_id;
