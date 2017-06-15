@@ -86,6 +86,8 @@ console.log('Trace1');
 console.log('Validating webhook');
 // Handle the webhook subscription request from Facebook
 app.get('/webhook', function(request, response) {
+	console.log(request.query['hub.mode']);
+	console.log(request.query['hub.verify_token']);
 	if (request.query['hub.mode'] === 'subscribe' &&
 		request.query['hub.verify_token'] === VERIFY_TOKEN) {
 		console.log('Validated webhook');
