@@ -67,6 +67,7 @@ console.log('Reading rows from the Table...');
 				console.error(err); response.send('Error ' + err);
 			} else {
 				console.log(rowCount + ' row(s) returned');
+				console.log(rows.permalink_url + ' returned');
 				response.render('pages/thanks.ejs', {results: rows} ); 
 			}     
         }
