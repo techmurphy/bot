@@ -45,7 +45,7 @@ var config = {
   options: {
       database: 'CustomUserRegistration_db',
       encrypt: true,
-      rowCollectionOnDone: true,
+      //rowCollectionOnDone: true,
       rowCollectionOnRequestCompletion: true
   }
 }
