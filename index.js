@@ -62,13 +62,13 @@ console.log('Reading rows from the Table...');
 
     // Read all rows from table
     var request = new Request(
-        "SELECT * FROM thanks", function(err, rowCount, rows) {
+        "SELECT * FROM thanks", function(err, rowCount, row) {
 		if (err) { 
 				console.error(err); response.send('Error ' + err);
 			} else {
 				console.log(rowCount + ' row(s) returned');
 				console.log(rows.permalink_url + ' returned');
-				response.render('pages/thanks.ejs', {results: rows} ); 
+				response.render('pages/thanks.ejs', {results: row} ); 
 			}     
         }
     );
