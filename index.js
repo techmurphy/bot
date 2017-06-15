@@ -95,6 +95,7 @@ app.get('/webhook', function(request, response) {
 		console.error('Failed validation. Make sure the validation tokens match.');
 		response.sendStatus(403);          
 	}
+	console.log('skipped if');
 });
 /*
 // Handle webhook payloads from Facebook
