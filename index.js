@@ -212,7 +212,6 @@ app.post('/webhook', function(request, response) {
 									});
 									console.log('Trace');
 									connection.execSql(request);
-								});
 							});
 						}
 					});
