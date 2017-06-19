@@ -26,7 +26,7 @@ app.set('port', process.env.PORT || 3000);
 
 
 app.use(express.static(__dirname + '/public'));
-//app.use(bodyParser.json({ verify: verifyRequestSignature }));
+app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'json');
 
