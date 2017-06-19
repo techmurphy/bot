@@ -2,7 +2,6 @@ const
 	crypto = require('crypto'),
 	express = require('express'),
 	bodyParser = require('body-parser'),
-	//pg = require('pg'),
 	request = require('request'),
 	response =  require('response');
 const
@@ -16,7 +15,6 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	process.exit(1);
 }
 console.log(' the verify token is '+VERIFY_TOKEN);
-//pg.defaults.ssl = true;
 
 var app = express();
 app.set('port', process.env.PORT || 3000);
@@ -108,7 +106,7 @@ app.post('/webhook', function(request, response) {
 	if(request.body && request.body.entry) {
 		request.body.entry.forEach(function(entry){
 			entry.changes.forEach(function(change){
-	console.log('handle webhook trace1'+change.field);
+	console.log('handle webhook trace1 '+change.field);
 				if(change.field === 'mention') {
 					let mention_id = (change.value.item === 'comment') ? 
 						change.value.comment_id : change.value.post_id;
@@ -166,9 +164,11 @@ app.post('/webhook', function(request, response) {
 									+ query_inserts.join(',')
 									+ `; SELECT * FROM thanks WHERE create_date > now() - INTERVAL '${interval}';`;
 								console.log('Query', query);
-								pg.connect(DATABASE_URL, function(err, client, done) {
-									client.query(query, function(err, result) {
-										done();
+								//pg.connect(DATABASE_URL, function(err, client, done) {
+									connection.on('connect', function(err) {
+									//client.query(query, function(err, result) {
+									request = new Request(query, function(err, rowCount, rows) {
+										//done();
 										if (err) { 
 											console.error(err); 
 										} else if (result) {
