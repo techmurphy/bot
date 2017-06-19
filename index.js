@@ -69,7 +69,7 @@ console.log('Reading rows from the Table...');
 			} else {
 				console.log(rowCount + ' row(s) returned');
 				request.on('done',function(rowCount, more, rows){
-        			console.log(rows+'is returned'); // not empty
+        			//console.log(rows+'is returned'); // not empty
 				//response.render('pages/thanks.ejs', {results: rows} );
 				});
 			}     
