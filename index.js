@@ -45,8 +45,8 @@ var config = {
   options: {
       database: 'CustomUserRegistration_db',
       encrypt: true,
-      rowCollectionOnDone: true
-      //rowCollectionOnRequestCompletion: true
+      rowCollectionOnDone: true,
+      rowCollectionOnRequestCompletion : true
   }
 }
 var connection = new Connection(config);
