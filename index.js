@@ -157,7 +157,7 @@ app.post('/webhook', function(request, response) {
 										&& body[recipient].managers.data[0]) 
 										manager = body[recipient].managers.data[0].id;
 									managers[recipient] = manager;
-									query_inserts.push(`(now(),'${permalink_url}','${recipient}','${manager}','${sender}','${message}')`);
+									query_inserts.push(`(getdate(),'${permalink_url}','${recipient}','${manager}','${sender}','${message}')`);
 								});
 								var interval = '1 week';
 								let query = 'INSERT INTO thanks VALUES ' 
