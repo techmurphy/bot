@@ -165,6 +165,11 @@ app.post('/webhook', function(request, response) {
 								console.log('Query', query);
 								//pg.connect(DATABASE_URL, function(err, client, done) {
 									connection.on('connect', function(err) {
+										 if (err) {
+												console.log(err);
+											  }
+										else{
+											console.log('Inserting into the Table...');
 									//client.query(query, function(err, result) {
 									request = new Request(query, function(err, rowCount, rows) {
 										//done();
