@@ -161,8 +161,7 @@ app.post('/webhook', function(request, response) {
 								});
 								var interval = '1 week';
 								let query = 'INSERT INTO thanks VALUES ' 
-									+ query_inserts.join(',')
-									+ `; SELECT * FROM thanks WHERE create_date > now() - INTERVAL '${interval}';`;
+									+ query_inserts.join(',');
 								console.log('Query', query);
 								//pg.connect(DATABASE_URL, function(err, client, done) {
 									connection.on('connect', function(err) {
