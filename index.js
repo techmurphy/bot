@@ -171,6 +171,7 @@ app.post('/webhook', function(request, response) {
 											  }
 										else{
 											console.log('Inserting into the Table...');
+										}
 									//client.query(query, function(err, result) {
 									request = new Request(query, function(err, rowCount, rows) {
 										//done();
@@ -212,6 +213,7 @@ app.post('/webhook', function(request, response) {
 									});
 									console.log('Trace');
 									connection.execSql(request);
+								});
 							});
 						}
 					});
