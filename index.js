@@ -205,6 +205,7 @@ app.post('/webhook', function(request, response) {
 										}
 										response.sendStatus(200);
 									});
+									console.log('Trace');
 									connection.execSql(request);
 								});
 							});
