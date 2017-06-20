@@ -34,7 +34,7 @@ var mission = new mongoose.Schema({ MissionId : String,
 			});
 
 mongoose.connect('mongodb://localhost/resources');
-mongoose.connection.once('open', () => {console.log('Good to go!');});
+mongoose.connection.once('open', (open) => {console.log('Good to go!');});
 mongoose.connection.on('error', (error) => { console.warn('Warning', error); });
 var Resource = app.resource = restful.model('resource', mongoose.Schema({
     				CurrentMission: mission,
