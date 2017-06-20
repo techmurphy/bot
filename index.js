@@ -3,7 +3,9 @@ const
 	express = require('express'),
 	bodyParser = require('body-parser'),
 	request = require('request'),
-	response =  require('response');
+	response =  require('response'),
+      	restful = require('node-restful'),
+	mongoose = restful.mongoose;
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
 	ACCESS_TOKEN = process.env.ACCESS_TOKEN,
@@ -14,10 +16,9 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	console.error('Missing environment values.');
 	process.exit(1);
 }
-console.log(' the verify token is '+VERIFY_TOKEN);
 
 var app = express();
-app.set('port', process.env.PORT || 3000);
+//app.set('port', process.env.PORT || 3000);
 
 //app.get('/', function(request, response) {
 //  var data = fs.readFileSync('index.html').toString();
@@ -26,7 +27,9 @@ app.set('port', process.env.PORT || 3000);
 
 
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
+app.use(bodyParser.json({type:'application/vnd.api+json'}));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'json');
 
