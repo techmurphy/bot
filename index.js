@@ -20,7 +20,26 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 var app = express();
 app.set('port', process.env.PORT || 3000);
 console.log('Port used' + process.env.PORT);
+var mission = new Schema({ MissionId : String,
+			   ExpertOktaUsername: String,
+			   MissionHostCountry : String,
+			   MissionOrganizationName: String,
+			   MissionName: String,
+			   MissionAreaOfExpertiseCategory: String,
+			   MissionAreaOfExpertise : String,
+			   MissionStartDate: String,
+			   MissionEndDate: String,
+			   MissionRoster: String,
+			   MissionResponsibleAdviserOktaUserName: String
+			});
 
+mongoose.connect("mongodb://http://thanksbot3.azurewebsites.net/resources");
+var Resource = app.resource = restful.model('resource', mongoose.Schema({
+    				CurrentMission: mission,
+  				OtherMissions: [mission]
+  				}))
+  .methods(['get', 'post', 'put', 'delete']);
+Resource.register(app, '/resources');
 //app.get('/', function(request, response) {
 //  var data = fs.readFileSync('index.html').toString();
 //  response.send(data);
