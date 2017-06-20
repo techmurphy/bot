@@ -18,7 +18,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 }
 
 var app = express();
-//app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3000);
 
 //app.get('/', function(request, response) {
 //  var data = fs.readFileSync('index.html').toString();
