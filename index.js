@@ -33,7 +33,12 @@ var mission = new mongoose.Schema({ MissionId : String,
 			   MissionResponsibleAdviserOktaUserName: String
 			});
 
-mongoose.connect("mongodb://localhost/resources");
+mongoose.connect('mongodb://localhost/resources');
+mongoose.connection
+ .once('open', () => console.log('Good to go!'))
+ .on('error', (error) => {
+ console.warn('Warning', error);
+ });
 var Resource = app.resource = restful.model('resource', mongoose.Schema({
     				CurrentMission: mission,
   				OtherMissions: [mission]
