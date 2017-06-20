@@ -20,7 +20,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 var app = express();
 app.set('port', process.env.PORT || 3000);
 console.log('Port used' + process.env.PORT);
-var mission = new Schema({ MissionId : String,
+var mission = new mongoose.Schema({ MissionId : String,
 			   ExpertOktaUsername: String,
 			   MissionHostCountry : String,
 			   MissionOrganizationName: String,
