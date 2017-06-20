@@ -33,7 +33,7 @@ var mission = new mongoose.Schema({ MissionId : String,
 			   MissionResponsibleAdviserOktaUserName: String
 			});
 
-mongoose.connect('localhost/resources');
+mongoose.connect('mongodb://localhost/resources');
 mongoose.connection
  .once('open', () => console.log('Good to go!'))
  .on('error', (error) => {
