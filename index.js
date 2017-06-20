@@ -33,7 +33,7 @@ var mission = new mongoose.Schema({ MissionId : String,
 			   MissionResponsibleAdviserOktaUserName: String
 			});
 
-mongoose.connect("mongodb://thanksbot3.azurewebsites.net/resources");
+mongoose.connect("mongodb://localhost/resources");
 var Resource = app.resource = restful.model('resource', mongoose.Schema({
     				CurrentMission: mission,
   				OtherMissions: [mission]
