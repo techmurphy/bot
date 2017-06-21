@@ -37,10 +37,7 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.json());
 app.post("/", function (req, res) {
-console.log('about to execute the insert'+req.body);
-    req.query("exec insertmission @mission")
-        .param('mission', req.body, TYPES.NVarChar)
-        .exec(res);
+  console.log(req.body) // populated!
   res.send(200, req.body);
 });
 
