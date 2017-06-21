@@ -1,11 +1,11 @@
 // Create connection to database
 {
  "connection":{
-              "userName": 'nrc',
-              "password": 'Admin150!',
-              "server": 'nrc-db.database.windows.net',
+              "userName": "nrc",
+              "password": "Admin150!",
+              "server": "nrc-db.database.windows.net",
               "options": {
-                  "database": 'CustomUserRegistration_db',
+                  "database": "CustomUserRegistration_db",
                   "encrypt": true,
                   "rowCollectionOnDone": true,
                   "rowCollectionOnRequestCompletion" : true
