@@ -3,7 +3,8 @@ var TYPES = require('tedious').TYPES;
 console.log('Inside the mission js file');
 
 router.route('/mission')
-.post(function (req, res) { 
+.post(function (req, res) {
+    console.log('about to execute the insert');
     req.query("exec insertmission @mission")
         .param('mission', req.body, TYPES.NVarChar)
         .exec(res);
