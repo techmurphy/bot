@@ -2,7 +2,6 @@ const
 	crypto = require('crypto'),
 	express = require('express'),
 	bodyParser = require('body-parser'),
-	//pg = require('pg'),
 	request = require('request'),
 	response =  require('response');
 const
@@ -15,8 +14,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	console.error('Missing environment values.');
 	process.exit(1);
 }
-
-//pg.defaults.ssl = true;
+console.log(' the verify token is '+VERIFY_TOKEN);
 
 var app = express();
 app.set('port', process.env.PORT || 3000);
@@ -30,7 +28,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
+app.set('view engine', 'json');
 
 // List out all the thanks recorded in the database
 //tedious = require('tedious');
@@ -45,8 +43,8 @@ var config = {
   options: {
       database: 'CustomUserRegistration_db',
       encrypt: true,
-      rowCollectionOnDone: true
-      //rowCollectionOnRequestCompletion: true
+      rowCollectionOnDone: true,
+      rowCollectionOnRequestCompletion : true
   }
 }
 var connection = new Connection(config);
@@ -68,11 +66,10 @@ console.log('Reading rows from the Table...');
 				
 			} else {
 				console.log(rowCount + ' row(s) returned');
-				request.on('done',function(rowCount, more, rows){
+				//request.on('done',function(rowCount, more, rows){
         			//console.log(rows+'is returned'); // not empty
-				response.write('The thanks table returned '+ rowCount + ' rows');
 				//response.render('pages/thanks.ejs', {results: rows} );
-				});
+				//});
 			}     
         }
     );
@@ -109,7 +106,7 @@ app.post('/webhook', function(request, response) {
 	if(request.body && request.body.entry) {
 		request.body.entry.forEach(function(entry){
 			entry.changes.forEach(function(change){
-	console.log('handle webhook trace1'+change.field);
+	console.log('handle webhook trace1 '+change.field);
 				if(change.field === 'mention') {
 					let mention_id = (change.value.item === 'comment') ? 
 						change.value.comment_id : change.value.post_id;
@@ -160,16 +157,24 @@ app.post('/webhook', function(request, response) {
 										&& body[recipient].managers.data[0]) 
 										manager = body[recipient].managers.data[0].id;
 									managers[recipient] = manager;
-									query_inserts.push(`(now(),'${permalink_url}','${recipient}','${manager}','${sender}','${message}')`);
+									query_inserts.push(`(getdate(),'${permalink_url}','${recipient}','${manager}','${sender}','${message}')`);
 								});
 								var interval = '1 week';
 								let query = 'INSERT INTO thanks VALUES ' 
 									+ query_inserts.join(',')
-									+ `; SELECT * FROM thanks WHERE create_date > now() - INTERVAL '${interval}';`;
+									+`;`;
 								console.log('Query', query);
-								pg.connect(DATABASE_URL, function(err, client, done) {
-									client.query(query, function(err, result) {
-										done();
+								//pg.connect(DATABASE_URL, function(err, client, done) {
+									connection.on('connect', function(err) {
+										 if (err) {
+												console.log(err);
+											  }
+										else{
+											console.log('Inserting into the Table...');
+										}
+									//client.query(query, function(err, result) {
+									request = new Request(query, function(err, rowCount, rows) {
+										//done();
 										if (err) { 
 											console.error(err); 
 										} else if (result) {
@@ -206,6 +211,8 @@ app.post('/webhook', function(request, response) {
 										}
 										response.sendStatus(200);
 									});
+									console.log('Trace');
+									connection.execSql(request);
 								});
 							});
 						}
