@@ -38,7 +38,7 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 app.post("/", function (req, res) {
   console.log(req.body);
-console.log('about to execute the insert'+req.body);
+console.log(req.body);
     req.query("exec insertmission @mission")
         .param('mission', req.body, TYPES.NVarChar)
         .exec(res);
