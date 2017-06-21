@@ -44,7 +44,7 @@ console.log('about to execute the insert'+req.body);
   res.send(200, req.body);
 });
 
-app.use('/mission', require('./routes/mission'));
+//app.use('/mission', require('./routes/mission'));
 console.log('trace1');
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
