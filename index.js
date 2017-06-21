@@ -15,7 +15,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	console.error('Missing environment values.');
 	process.exit(1);
 }
-console.log(' the verify token is '+VERIFY_TOKEN);
+
 //pg.defaults.ssl = true;
 
 var app = express();
@@ -69,7 +69,8 @@ console.log('Reading rows from the Table...');
 			} else {
 				console.log(rowCount + ' row(s) returned');
 				request.on('done',function(rowCount, more, rows){
-        			console.log(rows+'is returned'); // not empty
+        			//console.log(rows+'is returned'); // not empty
+				response.write('The thanks table returned '+ rowCount + ' rows');
 				//response.render('pages/thanks.ejs', {results: rows} );
 				});
 			}     
