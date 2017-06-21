@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
 /* POST insert mission */
 router.post('/', function (req, res) {
     
-    req.query("exec insertmissions @mission")
+    req.query("exec insertmission @mission")
         .param('mission', req.body, TYPES.NVarChar)
         .exec(res);
 
