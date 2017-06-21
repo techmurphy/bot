@@ -270,3 +270,4 @@ function verifyRequestSignature(req, res, buf) {
 		}
 	}
 }
+module.exports = app;
