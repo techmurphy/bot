@@ -34,7 +34,12 @@ app.use(function (req, res, next) {
     req.query = tediousExpress(req, config.get('connection'));
     next();
 });
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
+app.post("/", function (req, res) {
+  console.log(req.body) // populated!
+  res.send(200, req.body);
+});
+
 app.use('/mission', require('./routes/mission'));
 console.log('trace1');
 // catch 404 and forward to error handler
