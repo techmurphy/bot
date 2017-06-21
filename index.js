@@ -6,6 +6,7 @@ const
 	response =  require('response'),
       	restful = require('node-restful'),
         config = require('config'),
+        tediousExpress = require('express4-tedious');
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
 	ACCESS_TOKEN = process.env.ACCESS_TOKEN,
@@ -27,6 +28,20 @@ app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(bodyParser.json({type:'application/vnd.api+json'}));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'json');
+
+//using the expresstedious for the restapi
+app.use(function (req, res, next) {
+    req.query = tediousExpress(req, config.get('connection'));
+    next();
+});
+app.use(bodyParser.text()); 
+app.use('/mission', require('./routes/mission'));
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    var err = new Error('Not Found: '+ req.method + ":" + req.originalUrl);
+    err.status = 404;
+    next(err);
+});
 
 // List out all the thanks recorded in the database
 //tedious = require('tedious');
@@ -72,7 +87,7 @@ console.log('Reading rows from the Table...');
 });
 });
 
-console.log('Validating webhook');
+
 // Handle the webhook subscription request from Facebook
 app.get('/webhook', function(request, response) {
 	console.log(request.query['hub.mode']);
