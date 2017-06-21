@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
 });
 console.log('before the post part');
 /* POST insert mission */
-router.post('/', function (req, res) { 
+router.post('/mission', function (req, res) { 
     req.query("exec insertmission @mission")
         .param('mission', req.body, TYPES.NVarChar)
         .exec(res);
