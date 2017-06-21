@@ -1,6 +1,6 @@
 var router = require('express').Router();
 var TYPES = require('tedious').TYPES;
-
+console.log('Inside the mission js file');
 /* GET mission listing. */
 router.get('/', function (req, res) {
 
@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
         .into(res, '[]');
 
 });
-
+console.log('before the post part');
 /* POST insert mission */
 router.post('/', function (req, res) {
     
