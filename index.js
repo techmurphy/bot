@@ -37,7 +37,7 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.json());
 app.post("/", function (req, res) {
-  console.log(req.body) // populated!
+  console.log(req.body);
   res.send(200, req.body);
 });
 
