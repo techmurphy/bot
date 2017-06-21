@@ -5,9 +5,10 @@
               "password": "Admin150!",
               "server": "nrc-db.database.windows.net",
               "options": {
-                  "database": "CustomUserRegistration_db",
-                  "encrypt": true,
-                  "rowCollectionOnDone": true,
-                  "rowCollectionOnRequestCompletion" : true
-              }
+                           "database": "CustomUserRegistration_db",
+                           "encrypt": true,
+                           "rowCollectionOnDone": true,
+                           "rowCollectionOnRequestCompletion" : true
+                         }
+               }
 }
