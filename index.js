@@ -2,12 +2,9 @@ const
 	crypto = require('crypto'),
 	express = require('express'),
 	bodyParser = require('body-parser'),
+	//pg = require('pg'),
 	request = require('request'),
-	response =  require('response'),
-      	restful = require('node-restful'),
-        config = require('config'),
-        tediousExpress = require('express4-tedious'),
-	TYPES = require('tedious').TYPES;
+	response =  require('response');
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
 	ACCESS_TOKEN = process.env.ACCESS_TOKEN,
@@ -18,49 +15,41 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	console.error('Missing environment values.');
 	process.exit(1);
 }
+console.log(' the verify token is '+VERIFY_TOKEN);
+//pg.defaults.ssl = true;
 
 var app = express();
 app.set('port', process.env.PORT || 3000);
-console.log('Port used' + process.env.PORT);
 
-//app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({ extended: true}));
-//app.use(bodyParser.json({ verify: verifyRequestSignature }));
-//app.use(bodyParser.json({type:'application/vnd.api+json'}));
-//app.set('views', __dirname + '/views');
-//app.set('view engine', 'json');
+//app.get('/', function(request, response) {
+//  var data = fs.readFileSync('index.html').toString();
+//  response.send(data);
+//});
 
-//using the expresstedious for the restapi
-app.use(function (req, res, next) {
-    req.query = tediousExpress(req, config.get('connection'));
-    next();
-});
-app.use(bodyParser.json());
-app.post("/", function (req, res) {
-  console.log(req.body);
-console.log(req.body);
-	console.log(req.query);
-    req.query("exec insertmission @mission")
-        .param('mission', req.body, TYPES.NVarChar)
-        .exec(res);
-  res.send(200, req.body);
-});
 
-//app.use('/mission', require('./routes/mission'));
-console.log('trace1');
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found: '+ req.method + ":" + req.originalUrl);
-    err.status = 404;
-    next(err);
-});
+app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json({ verify: verifyRequestSignature }));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
 
 // List out all the thanks recorded in the database
 //tedious = require('tedious');
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 
-var connection = new Connection(config.get('connection'));
+// Create connection to database
+var config = {
+  userName: 'nrc',
+  password: 'Admin150!',
+  server: 'nrc-db.database.windows.net',
+  options: {
+      database: 'CustomUserRegistration_db',
+      encrypt: true,
+      rowCollectionOnDone: true
+      //rowCollectionOnRequestCompletion: true
+  }
+}
+var connection = new Connection(config);
 
 app.get('/', function (request, response) {
 // Attempt to connect and execute queries if connection goes through
@@ -79,11 +68,9 @@ console.log('Reading rows from the Table...');
 				
 			} else {
 				console.log(rowCount + ' row(s) returned');
-				response.send('Number of rows returned: '+rowCount);
-				//request.on('done',function(rowCount, more, rows){
-        			//console.log(rows+'is returned'); // not empty
-				//response.render('pages/thanks.ejs', {results: rows} );
-				//});
+				request.on('done',function(rowCount, more, rows){
+        			console.log(rows+'is returned'); // not empty
+				response.render('pages/thanks.ejs', {results: rows} ); });
 			}     
         }
     );
@@ -99,7 +86,7 @@ console.log('Reading rows from the Table...');
 });
 });
 
-
+console.log('Validating webhook');
 // Handle the webhook subscription request from Facebook
 app.get('/webhook', function(request, response) {
 	console.log(request.query['hub.mode']);
@@ -120,7 +107,7 @@ app.post('/webhook', function(request, response) {
 	if(request.body && request.body.entry) {
 		request.body.entry.forEach(function(entry){
 			entry.changes.forEach(function(change){
-	console.log('handle webhook trace1 '+change.field);
+	console.log('handle webhook trace1'+change.field);
 				if(change.field === 'mention') {
 					let mention_id = (change.value.item === 'comment') ? 
 						change.value.comment_id : change.value.post_id;
@@ -171,24 +158,16 @@ app.post('/webhook', function(request, response) {
 										&& body[recipient].managers.data[0]) 
 										manager = body[recipient].managers.data[0].id;
 									managers[recipient] = manager;
-									query_inserts.push(`(getdate(),'${permalink_url}','${recipient}','${manager}','${sender}','${message}')`);
+									query_inserts.push(`(now(),'${permalink_url}','${recipient}','${manager}','${sender}','${message}')`);
 								});
 								var interval = '1 week';
 								let query = 'INSERT INTO thanks VALUES ' 
 									+ query_inserts.join(',')
-									+`;`;
+									+ `; SELECT * FROM thanks WHERE create_date > now() - INTERVAL '${interval}';`;
 								console.log('Query', query);
-								//pg.connect(DATABASE_URL, function(err, client, done) {
-									connection.on('connect', function(err) {
-										 if (err) {
-												console.log(err);
-											  }
-										else{
-											console.log('Inserting into the Table...');
-										}
-									//client.query(query, function(err, result) {
-									request = new Request(query, function(err, rowCount, rows) {
-										//done();
+								pg.connect(DATABASE_URL, function(err, client, done) {
+									client.query(query, function(err, result) {
+										done();
 										if (err) { 
 											console.error(err); 
 										} else if (result) {
@@ -225,8 +204,6 @@ app.post('/webhook', function(request, response) {
 										}
 										response.sendStatus(200);
 									});
-									console.log('Trace');
-									connection.execSql(request);
 								});
 							});
 						}
