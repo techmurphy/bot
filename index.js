@@ -6,7 +6,8 @@ const
 	response =  require('response'),
       	restful = require('node-restful'),
         config = require('config'),
-        tediousExpress = require('express4-tedious');
+        tediousExpress = require('express4-tedious'),
+	TYPES = require('tedious').TYPES;
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
 	ACCESS_TOKEN = process.env.ACCESS_TOKEN,
