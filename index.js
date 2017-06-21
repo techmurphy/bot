@@ -6,7 +6,6 @@ const
 	response =  require('response'),
       	restful = require('node-restful'),
         config = require('config'),
-	mongoose = restful.mongoose;
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
 	ACCESS_TOKEN = process.env.ACCESS_TOKEN,
@@ -21,33 +20,6 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 var app = express();
 app.set('port', process.env.PORT || 3000);
 console.log('Port used' + process.env.PORT);
-var mission = new mongoose.Schema({ MissionId : String,
-			   ExpertOktaUsername: String,
-			   MissionHostCountry : String,
-			   MissionOrganizationName: String,
-			   MissionName: String,
-			   MissionAreaOfExpertiseCategory: String,
-			   MissionAreaOfExpertise : String,
-			   MissionStartDate: String,
-			   MissionEndDate: String,
-			   MissionRoster: String,
-			   MissionResponsibleAdviserOktaUserName: String
-			});
-
-mongoose.connect('localhost/resources');
-mongoose.connection.once('open', function callback() {console.log('Good to go!');});
-mongoose.connection.on('error', function(err) { console.log('conenction error'); });
-var Resource = app.resource = restful.model('resource', mongoose.Schema({
-    				CurrentMission: mission,
-  				OtherMissions: [mission]
-  				}))
-  .methods(['get', 'post', 'put', 'delete']);
-Resource.register(app, '/resources');
-//app.get('/', function(request, response) {
-//  var data = fs.readFileSync('index.html').toString();
-//  response.send(data);
-//});
-
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true}));
