@@ -5,6 +5,7 @@ const
 	request = require('request'),
 	response =  require('response'),
       	restful = require('node-restful'),
+        config = require('config'),
 	mongoose = restful.mongoose;
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
@@ -60,19 +61,7 @@ app.set('view engine', 'json');
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 
-// Create connection to database
-var config = {
-  userName: 'nrc',
-  password: 'Admin150!',
-  server: 'nrc-db.database.windows.net',
-  options: {
-      database: 'CustomUserRegistration_db',
-      encrypt: true,
-      rowCollectionOnDone: true,
-      rowCollectionOnRequestCompletion : true
-  }
-}
-var connection = new Connection(config);
+var connection = new Connection(config.get('connection'));
 
 app.get('/', function (request, response) {
 // Attempt to connect and execute queries if connection goes through
