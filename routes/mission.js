@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var TYPES = require('tedious').TYPES;
 console.log('Inside the mission js file');
+app.use('/',router);
 
 router.route('/mission')
 .post(function (req, res) {
