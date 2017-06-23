@@ -24,7 +24,7 @@ console.log('Port used' + process.env.PORT);
 
 //app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true}));
-app.use(bodyParser.json({ verify: verifyRequestSignature }));
+//app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(bodyParser.json({type:'application/vnd.api+json'}));
 //app.set('views', __dirname + '/views');
 app.set('view engine', 'json');
