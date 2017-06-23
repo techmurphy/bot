@@ -35,8 +35,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-var client =  new Client();
-
 app.use(bodyParser.json());
 app.post("/", function (req, res) {
   console.log(req.body);
