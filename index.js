@@ -4,7 +4,6 @@ const
 	bodyParser = require('body-parser'),
 	request = require('request'),
 	response =  require('response'),
-      	restful = require('node-restful'),
         config = require('config'),
         tediousExpress = require('express4-tedious'),
 	TYPES = require('tedious').TYPES;
@@ -35,6 +34,9 @@ app.use(function (req, res, next) {
     req.query = tediousExpress(req, config.get('connection'));
     next();
 });
+
+var client =  new Client();
+
 app.use(bodyParser.json());
 app.post("/", function (req, res) {
   console.log(req.body);
@@ -43,6 +45,7 @@ console.log(req.body);
     req.query("exec insertmission @mission")
         .param('mission', req.body, TYPES.NVarChar)
         .exec(res);
+console.log(req.query);	
   res.send(200, req.body);
 });
 
@@ -80,9 +83,9 @@ console.log('Reading rows from the Table...');
 			} else {
 				console.log(rowCount + ' row(s) returned');
 				response.send('Number of rows returned: '+rowCount);
-				request.on('row',function(columns){
+				//request.on('row',function(columns){
         			//console.log(rows+'is returned'); // not empty
-				//response.render('pages/thanks.ejs', {results: rows} );
+				response.render('pages/thanks.ejs', {results: rows} );
 				//});
 			}     
         }
