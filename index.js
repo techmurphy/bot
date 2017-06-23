@@ -11,18 +11,18 @@ const
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
-app.post('/',function(res, req){
-  console.log('body: ', req.body);
-  console.log('query: ', req.query);
-	res.send('OK');
-});
+
 
 app.use(function (req, res, next) {
     req.query = tediousExpress(req, config.get('connection'));
     next();
 });
 
-
+app.post('/',function(res, req){
+  console.log('body: ', req.body);
+  console.log('query: ', req.query);
+	res.send('OK');
+});
 
 //app.use('/mission', require('./routes/mission'));
 
