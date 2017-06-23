@@ -3,7 +3,11 @@ const
 	express = require('express'),
 	bodyParser = require('body-parser'),
 	request = require('request'),
-	response =  require('response');
+	response =  require('response'),
+      	restful = require('node-restful'),
+        config = require('config'),
+        tediousExpress = require('express4-tedious'),
+	TYPES = require('tedious').TYPES;
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
 	ACCESS_TOKEN = process.env.ACCESS_TOKEN,
@@ -14,40 +18,49 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	console.error('Missing environment values.');
 	process.exit(1);
 }
-console.log(' the verify token is '+VERIFY_TOKEN);
 
 var app = express();
 app.set('port', process.env.PORT || 3000);
+console.log('Port used' + process.env.PORT);
 
-//app.get('/', function(request, response) {
-//  var data = fs.readFileSync('index.html').toString();
-//  response.send(data);
-//});
+//app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: true}));
+//app.use(bodyParser.json({ verify: verifyRequestSignature }));
+//app.use(bodyParser.json({type:'application/vnd.api+json'}));
+//app.set('views', __dirname + '/views');
+//app.set('view engine', 'json');
 
+//using the expresstedious for the restapi
+app.use(function (req, res, next) {
+    req.query = tediousExpress(req, config.get('connection'));
+    next();
+});
+app.use(bodyParser.json());
+app.post("/", function (req, res) {
+  console.log(req.body);
+console.log(req.body);
+	console.log(req.query);
+    req.query("exec insertmission @mission")
+        .param('mission', req.body, TYPES.NVarChar)
+        .exec(res);
+  res.send(200, req.body);
+});
 
-app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json({ verify: verifyRequestSignature }));
-app.set('views', __dirname + '/views');
-app.set('view engine', 'json');
+//app.use('/mission', require('./routes/mission'));
+console.log('trace1');
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    var err = new Error('Not Found: '+ req.method + ":" + req.originalUrl);
+    err.status = 404;
+    next(err);
+});
 
 // List out all the thanks recorded in the database
 //tedious = require('tedious');
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 
-// Create connection to database
-var config = {
-  userName: 'nrc',
-  password: 'Admin150!',
-  server: 'nrc-db.database.windows.net',
-  options: {
-      database: 'CustomUserRegistration_db',
-      encrypt: true,
-      rowCollectionOnDone: true,
-      rowCollectionOnRequestCompletion : true
-  }
-}
-var connection = new Connection(config);
+var connection = new Connection(config.get('connection'));
 
 app.get('/', function (request, response) {
 // Attempt to connect and execute queries if connection goes through
@@ -66,6 +79,7 @@ console.log('Reading rows from the Table...');
 				
 			} else {
 				console.log(rowCount + ' row(s) returned');
+				response.send('Number of rows returned: '+rowCount);
 				//request.on('done',function(rowCount, more, rows){
         			//console.log(rows+'is returned'); // not empty
 				//response.render('pages/thanks.ejs', {results: rows} );
@@ -85,7 +99,7 @@ console.log('Reading rows from the Table...');
 });
 });
 
-console.log('Validating webhook');
+
 // Handle the webhook subscription request from Facebook
 app.get('/webhook', function(request, response) {
 	console.log(request.query['hub.mode']);
