@@ -9,6 +9,7 @@ const
         router = require('express').Router();
 	TYPES = require('tedious').TYPES;
 var app = express();
+app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
@@ -32,7 +33,7 @@ app.use(function (req, res, next) {
     err.status = 404;
     next(err);
 });
-app.set('port', process.env.PORT || 3000);
+
 
 module.exports = app;
 /*
