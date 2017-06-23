@@ -8,7 +8,13 @@ const
         tediousExpress = require('express4-tedious'),
 	TYPES = require('tedious').TYPES;
 var app = express();
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
+app.post('*' (res, req) => {
+  console.log('body: ', req.body)
+  console.log('query: ', req.query)
+})
+
 app.use(function (req, res, next) {
     req.query = tediousExpress(req, config.get('connection'));
     next();
@@ -16,7 +22,7 @@ app.use(function (req, res, next) {
 
 
 
-app.use('/mission', require('./routes/mission'));
+//app.use('/mission', require('./routes/mission'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -25,10 +31,6 @@ app.use(function (req, res, next) {
     next(err);
 });
 app.set('port', process.env.PORT || 3000);
-
-var server = app.listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + server.address().port);
-});
 
 module.exports = app;
 /*
