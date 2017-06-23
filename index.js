@@ -43,8 +43,8 @@ console.log(req.body);
     req.query("exec insertmission @mission")
         .param('mission', req.body, TYPES.NVarChar)
         .exec(res);
-console.log(req.query);	
-  res.status(200).send(req.body);
+//console.log(@mission);	
+  //res.status(200).send(req.body);
 });
 
 //app.use('/mission', require('./routes/mission'));
