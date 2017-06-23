@@ -43,7 +43,7 @@ console.log(JSON.stringify(req.body));
     req.query("exec insertmission @mission")
         .param('mission', JSON.stringify(req.body), TYPES.NVarChar)
         .exec(res);
-	res.status(200).send(body);
+	res.status(200).send(req.body);
   //res.send(200, req.body);
 });
 
