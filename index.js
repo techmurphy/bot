@@ -34,7 +34,14 @@ app.use(function (req, res, next) {
     req.query = tediousExpress(req, config.get('connection'));
     next();
 });
-var data='{
+
+request.post({
+     url: "http://thanksbot3.azurewebsites.net/",
+     headers: {
+        "Content-Type": "application/json"
+     },
+     body: {
+       {
 "CurrentMission" : {
    "MissionId" : "90de0ef9-b461-4626-8401-c2d612137b2b",
    "ExpertOktaUsername": "max.mustermann@visual-world.de",
@@ -48,7 +55,15 @@ var data='{
    "MissionRoster": "NORCAP1",
    "MissionResponsibleAdviserOktaUserName": "rene.stoeckmann@visual-world.de"
 }
-}';
+}
+     },
+     json:true
+}, function(error, response, body){
+   console.log(error);
+   console.log(JSON.stringify(response));
+   console.log(body);
+});
+
 app.use(bodyParser.json());
 app.post("/", function (req, res) {
   console.log(req.body);
