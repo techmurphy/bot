@@ -38,12 +38,13 @@ app.use(function (req, res, next) {
 
 app.post("/", function (req, res) {
   console.log(req.body);
-console.log(req.body);
+console.log(JSON.stringify(req.body));
 	console.log(req.query);
     req.query("exec insertmission @mission")
         .param('mission', JSON.stringify(req.body), TYPES.NVarChar)
         .exec(res);
-  res.send(200, req.body);
+	res.status(200).send(body);
+  //res.send(200, req.body);
 });
 
 //app.use('/mission', require('./routes/mission'));
