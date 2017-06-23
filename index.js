@@ -34,14 +34,28 @@ app.use(function (req, res, next) {
     req.query = tediousExpress(req, config.get('connection'));
     next();
 });
-
+var data='{
+"CurrentMission" : {
+   "MissionId" : "90de0ef9-b461-4626-8401-c2d612137b2b",
+   "ExpertOktaUsername": "max.mustermann@visual-world.de",
+   "MissionHostCountry" : "Switzerland",
+   "MissionOrganizationName": "UNHCR",
+   "MissionName": "Senior Protection Officer (2/2)",
+   "MissionAreaOfExpertiseCategory": "Protection",
+   "MissionAreaOfExpertise" : "Protection",
+   "MissionStartDate": "2017-05-01",
+   "MissionEndDate": "2017-12-31",
+   "MissionRoster": "NORCAP1",
+   "MissionResponsibleAdviserOktaUserName": "rene.stoeckmann@visual-world.de"
+}
+}';
 app.use(bodyParser.json());
 app.post("/", function (req, res) {
   console.log(req.body);
 console.log(req.body);
 	console.log(req.query);
     req.query("exec insertmission @mission")
-        .param('mission', req.body, TYPES.NVarChar)
+        .param('mission', data, TYPES.NVarChar)
         .exec(res);
 //console.log(@mission);	
   //res.status(200).send(req.body);
