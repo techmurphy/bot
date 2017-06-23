@@ -7,14 +7,14 @@ const
         config = require('config'),
         tediousExpress = require('express4-tedious'),
 	TYPES = require('tedious').TYPES;
-
 var app = express();
+app.use(bodyParser());
 app.use(function (req, res, next) {
     req.query = tediousExpress(req, config.get('connection'));
     next();
 });
 
-app.use(bodyParser.urlencoded({ extended: false}));
+
 
 app.use('/mission', require('./routes/mission'));
 
