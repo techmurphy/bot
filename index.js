@@ -12,10 +12,10 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(app.router);
-app.post('/',function(res, req)){
-  console.log('body: ', req.body)
-  console.log('query: ', req.query)
-})
+app.post('/',function(res, req){
+  console.log('body: ', req.body);
+  console.log('query: ', req.query);
+});
 
 app.use(function (req, res, next) {
     req.query = tediousExpress(req, config.get('connection'));
