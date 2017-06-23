@@ -4,39 +4,10 @@ const
 	bodyParser = require('body-parser'),
 	request = require('request'),
 	response =  require('response'),
+      	restful = require('node-restful'),
         config = require('config'),
         tediousExpress = require('express4-tedious'),
-        router = require('express').Router();
 	TYPES = require('tedious').TYPES;
-var app = express();
-app.set('port', process.env.PORT || 3000);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true}));
-
-
-app.use(function (req, res, next) {
-    req.query = tediousExpress(req, config.get('connection'));
-    next();
-});
-
-app.post("/",function(res, req){
-  console.log('body: ', req.body);
-  console.log('query: ', req.query);
-	res.send('OK');
-});
-
-//app.use('/mission', require('./routes/mission'));
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found: '+ req.method + ":" + req.originalUrl);
-    err.status = 404;
-    next(err);
-});
-
-
-module.exports = app;
-/*
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
 	ACCESS_TOKEN = process.env.ACCESS_TOKEN,
@@ -55,55 +26,24 @@ console.log('Port used' + process.env.PORT);
 //app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true}));
 //app.use(bodyParser.json({ verify: verifyRequestSignature }));
-app.use(bodyParser.json({type:'application/vnd.api+json'}));
+//app.use(bodyParser.json({type:'application/vnd.api+json'}));
 //app.set('views', __dirname + '/views');
-app.set('view engine', 'json');
+//app.set('view engine', 'json');
 
 //using the expresstedious for the restapi
 app.use(function (req, res, next) {
     req.query = tediousExpress(req, config.get('connection'));
     next();
 });
-
-request.post({
-     url: "http://thanksbot3.azurewebsites.net/",
-     headers: {
-        "Content-Type": "application/json"
-     },
-     body: {
-//       {
-//"CurrentMission" : {
-   "MissionId" : "90de0ef9-b461-4626-8401-c2d612137b2b",
-   "ExpertOktaUsername": "max.mustermann@visual-world.de",
-   "MissionHostCountry" : "Switzerland",
-   "MissionOrganizationName": "UNHCR",
-   "MissionName": "Senior Protection Officer (2/2)",
-   "MissionAreaOfExpertiseCategory": "Protection",
-   "MissionAreaOfExpertise" : "Protection",
-   "MissionStartDate": "2017-05-01",
-   "MissionEndDate": "2017-12-31",
-   "MissionRoster": "NORCAP1",
-   "MissionResponsibleAdviserOktaUserName": "rene.stoeckmann@visual-world.de"
-//}
-//}
-     },
-     json:true
-}, function(error, response, body){
-   console.log(error);
-   console.log(JSON.stringify(response));
-   console.log(body);
-});
-
 app.use(bodyParser.json());
 app.post("/", function (req, res) {
   console.log(req.body);
 console.log(req.body);
 	console.log(req.query);
     req.query("exec insertmission @mission")
-        .param('mission', data, TYPES.NVarChar)
+        .param('mission', req.body, TYPES.NVarChar)
         .exec(res);
-//console.log(@mission);	
-  //res.status(200).send(req.body);
+  res.send(200, req.body);
 });
 
 //app.use('/mission', require('./routes/mission'));
@@ -140,9 +80,9 @@ console.log('Reading rows from the Table...');
 			} else {
 				console.log(rowCount + ' row(s) returned');
 				response.send('Number of rows returned: '+rowCount);
-				//request.on('row',function(columns){
+				//request.on('done',function(rowCount, more, rows){
         			//console.log(rows+'is returned'); // not empty
-				response.render('pages/thanks.ejs', {results: rows} );
+				//response.render('pages/thanks.ejs', {results: rows} );
 				//});
 			}     
         }
@@ -329,7 +269,3 @@ function verifyRequestSignature(req, res, buf) {
 		}
 	}
 }
-
-
-
-*/
