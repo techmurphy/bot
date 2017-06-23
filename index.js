@@ -24,11 +24,10 @@ console.log('Port used' + process.env.PORT);
 
 //app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true}));
-app.use(express.bodyParser());
-//app.use(bodyParser.json({ verify: verifyRequestSignature }));
-//app.use(bodyParser.json({type:'application/vnd.api+json'}));
+app.use(bodyParser.json({ verify: verifyRequestSignature }));
+app.use(bodyParser.json({type:'application/vnd.api+json'}));
 //app.set('views', __dirname + '/views');
-//app.set('view engine', 'json');
+app.set('view engine', 'json');
 
 //using the expresstedious for the restapi
 app.use(function (req, res, next) {
