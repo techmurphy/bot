@@ -9,7 +9,7 @@ router.get('/',function (req, res) {
 });
 
 router.post('/',function (req, res) {
-    console.log('about to execute the insert'+req.body);
+    console.log('about to execute the insert'+req.body.ExpertOktaUsername);
     req.query("exec insertmission @mission")
         .param('mission', req.body, TYPES.NVarChar)
         .exec(res);
