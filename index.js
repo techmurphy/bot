@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.post('/',function(res, req){
   console.log('body: ', req.body);
   console.log('query: ', req.query);
+	res.send('OK');
 });
 
 app.use(function (req, res, next) {
