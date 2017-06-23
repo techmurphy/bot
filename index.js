@@ -41,8 +41,8 @@ request.post({
         "Content-Type": "application/json"
      },
      body: {
-       {
-"CurrentMission" : {
+//       {
+//"CurrentMission" : {
    "MissionId" : "90de0ef9-b461-4626-8401-c2d612137b2b",
    "ExpertOktaUsername": "max.mustermann@visual-world.de",
    "MissionHostCountry" : "Switzerland",
@@ -54,8 +54,8 @@ request.post({
    "MissionEndDate": "2017-12-31",
    "MissionRoster": "NORCAP1",
    "MissionResponsibleAdviserOktaUserName": "rene.stoeckmann@visual-world.de"
-}
-}
+//}
+//}
      },
      json:true
 }, function(error, response, body){
