@@ -18,12 +18,13 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	process.exit(1);
 }
 
-var app = express();
+var app = express.createServer();
 app.set('port', process.env.PORT || 3000);
 console.log('Port used' + process.env.PORT);
 
 //app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true}));
+app.user(express.bodyParser());
 //app.use(bodyParser.json({ verify: verifyRequestSignature }));
 //app.use(bodyParser.json({type:'application/vnd.api+json'}));
 //app.set('views', __dirname + '/views');
