@@ -15,7 +15,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(bodyParser.json()); 
-app.use(app.router);
+
 app.use('/mission', require('./routes/mission'));
 
 // catch 404 and forward to error handler
