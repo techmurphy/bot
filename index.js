@@ -44,7 +44,7 @@ console.log(req.body);
         .param('mission', req.body, TYPES.NVarChar)
         .exec(res);
 console.log(req.query);	
-  res.send(200, req.body);
+  res.status(200).send(req.body);
 });
 
 //app.use('/mission', require('./routes/mission'));
