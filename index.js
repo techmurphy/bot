@@ -80,7 +80,7 @@ console.log('Reading rows from the Table...');
 			} else {
 				console.log(rowCount + ' row(s) returned');
 				response.send('Number of rows returned: '+rowCount);
-				//request.on('done',function(rowCount, more, rows){
+				request.on('row',function(columns){
         			//console.log(rows+'is returned'); // not empty
 				//response.render('pages/thanks.ejs', {results: rows} );
 				//});
