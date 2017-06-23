@@ -13,6 +13,7 @@ router.post('/',function (req, res) {
     req.query("exec insertmission @mission")
         .param('mission', req.body, TYPES.NVarChar)
         .exec(res);
+    console.log("trace1");
 });
 
 
