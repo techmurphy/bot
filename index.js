@@ -14,7 +14,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(express.bodyParser()); 
+app.use(bodyParser.json()); 
 app.use(app.router);
 app.use('/mission', require('./routes/mission'));
 
