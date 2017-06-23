@@ -18,6 +18,3 @@ as begin
 				missionroster varchar(150),
 				missionresponsibleadvisoroktausername varchar(200))
 end
-GO
-
-select * from mission for json path
