@@ -19,7 +19,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.post('/',function(res, req){
+app.post("/",function(res, req){
   console.log('body: ', req.body);
   console.log('query: ', req.query);
 	res.send('OK');
