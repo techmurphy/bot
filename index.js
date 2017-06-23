@@ -22,7 +22,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 var app = express();
 app.set('port', process.env.PORT || 3000);
 console.log('Port used' + process.env.PORT);
-
+app.use(bodyParser.json());
 //app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true}));
 //app.use(bodyParser.json({ verify: verifyRequestSignature }));
@@ -35,13 +35,13 @@ app.use(function (req, res, next) {
     req.query = tediousExpress(req, config.get('connection'));
     next();
 });
-app.use(bodyParser.json());
+
 app.post("/", function (req, res) {
   console.log(req.body);
 console.log(req.body);
 	console.log(req.query);
     req.query("exec insertmission @mission")
-        .param('mission', req.body, TYPES.NVarChar)
+        .param('mission', JSON.stringify(req.body), TYPES.NVarChar)
         .exec(res);
   res.send(200, req.body);
 });
