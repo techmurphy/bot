@@ -6,6 +6,7 @@ const
 	response =  require('response'),
         config = require('config'),
         tediousExpress = require('express4-tedious'),
+        router = require('express').Router();
 	TYPES = require('tedious').TYPES;
 var app = express();
 app.use(bodyParser.json());
