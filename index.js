@@ -22,12 +22,13 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 var app = express();
 app.set('port', process.env.PORT || 3000);
 //console.log('Port used' + process.env.PORT);
-app.use(bodyParser.json());
-//app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({ extended: true}));
+//app.use(bodyParser.json());
 console.log('Before');
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 console.log('after');
+//app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: true}));
+
 //app.use(bodyParser.json({type:'application/vnd.api+json'}));
 //app.set('views', __dirname + '/views');
 //app.set('view engine', 'json');
