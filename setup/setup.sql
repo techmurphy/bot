@@ -1,6 +1,6 @@
 DROP PROCEDURE IF EXISTS insertmission
 GO
-
+PRINT N'MISSION VALUE IS'+ @mission.';
 create procedure dbo.insertmission(@mission nvarchar(max))
 as begin
 	insert into mission
