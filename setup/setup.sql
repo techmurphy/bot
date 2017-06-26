@@ -6,15 +6,15 @@ as begin
 	insert into mission
 	select *
 	from OPENJSON(@mission,'$."CurrentMission"') 
-			WITH (	missionid varchar(150),
-				exportoktausername varchar(200),
-				missionhostcountry varchar(100),
-				missionorganizationname varchar(15),
-				missionname varchar(100),
-				missionareaofexpertisecategory varchar(100),
-				missionareaofexpertise varchar(150),
-				missionstartdate date,
-				missionenddate date,
-				missionroster varchar(150),
-				missionresponsibleadvisoroktausername varchar(200))
+			WITH (	MissionId varchar(150),
+				ExpertOktaUsername varchar(200),
+				MissionHostCountry varchar(100),
+				MissionOrganizationName varchar(15),
+				MissionName varchar(100),
+				MissionAreaOfExpertiseCategory varchar(100),
+				MissionAreaOfExpertise varchar(150),
+				MissionStartDate date,
+				MissionEndDate date,
+				MissionRoster varchar(150),
+				MissionResponsibleAdviserOktaUserName varchar(200))
 end
