@@ -5,7 +5,7 @@ create procedure dbo.insertmission(@mission nvarchar(max))
 as begin
 	insert into mission
 	select *
-	from OPENJSON(@mission) 
+	from OPENJSON(@mission,'$."CurrentMission"') 
 			WITH (	missionid varchar(150),
 				exportoktausername varchar(200),
 				missionhostcountry varchar(100),
