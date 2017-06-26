@@ -42,7 +42,8 @@ app.use(function (req, res, next) {
 app.post("/", function (req, res) {
   //console.log(req.body);
 console.log('JSON stringigfy'+JSON.stringify(req.body));
-console.log('JSON parse'+JSON.parse(JSON.stringify(req.body)));
+var body = JSON.parse(JSON.stringify(req.body));
+	console.log('Extracted data is'+body.CurrentMission.MissionId);
     req.query("exec insertmission @mission")
         .param('mission', JSON.stringify(req.body), TYPES.NVarChar)
         .exec(res);
