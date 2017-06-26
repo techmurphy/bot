@@ -21,7 +21,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 
 var app = express();
 app.set('port', process.env.PORT || 3000);
-console.log('Port used' + process.env.PORT);
+//console.log('Port used' + process.env.PORT);
 app.use(bodyParser.json());
 //app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -37,8 +37,8 @@ app.use(function (req, res, next) {
 });
 
 app.post("/", function (req, res) {
-  console.log(req.body);
-console.log(JSON.stringify(req.body));	
+  //console.log(req.body);
+//console.log(JSON.stringify(req.body));	
     req.query("exec insertmission @mission")
         .param('mission', JSON.stringify(req.body), TYPES.NVarChar)
         .exec(res);
