@@ -47,7 +47,6 @@ app.post("/", function (req, res) {
 });
 
 //app.use('/mission', require('./routes/mission'));
-console.log('trace1');
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found: '+ req.method + ":" + req.originalUrl);
@@ -252,7 +251,7 @@ var graphapi = request.defaults({
 
 function verifyRequestSignature(req, res, buf) {
 	var signature = req.headers['x-hub-signature'];
-
+console.log("inside validate signatire");
 	if (!signature) {
 		// For testing, let's log an error. In production, you should throw an error.
 		console.error("Couldn't validate the signature.");
