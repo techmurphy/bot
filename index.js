@@ -25,7 +25,9 @@ app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 //app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true}));
+console.leg('Before');
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
+console.log('after');
 //app.use(bodyParser.json({type:'application/vnd.api+json'}));
 //app.set('views', __dirname + '/views');
 //app.set('view engine', 'json');
@@ -251,7 +253,7 @@ var graphapi = request.defaults({
 
 function verifyRequestSignature(req, res, buf) {
 	var signature = req.headers['x-hub-signature'];
-console.log("inside validate signatire");
+console.log('inside validate signatire');
 	if (!signature) {
 		// For testing, let's log an error. In production, you should throw an error.
 		console.error("Couldn't validate the signature.");
