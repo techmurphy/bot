@@ -39,11 +39,12 @@ app.use(function (req, res, next) {
 app.post("/", function (req, res) {
   console.log(req.body);
 console.log(JSON.stringify(req.body));
-	console.log(req.query);
+	
     req.query("exec insertmission @mission")
         .param('mission', JSON.stringify(req.body), TYPES.NVarChar)
         .exec(res);
 	res.status(200).send(req.body);
+console.log("the query is"+req.query);
   //res.send(200, req.body);
 });
 
