@@ -15,8 +15,5 @@
     "express": "4.15.2",
     "body-parser": "^1.15.0",
     "request": "^2.79.0"
-  },
-  "author": "Facebook Inc.",
-  "license": "See LICENSE file.",
-  "private": true
+  }
 }
