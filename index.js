@@ -261,7 +261,7 @@ console.log('inside validate signatire');
 	if (!signature) {
 		// For testing, let's log an error. In production, you should throw an error.
 		console.error("Couldn't validate the signature.");
-		console.log('Couldn't validate the signature');
+		console.log("Couldn't validate the signature");
 	} else {
 		var elements = signature.split('=');
 		var signatureHash = elements[1];
@@ -271,7 +271,7 @@ console.log('inside validate signatire');
 			.digest('hex');
 
 		if (signatureHash != expectedHash) {
-			console.log('Couldn't validate the request signature.');
+			console.log("Couldn't validate the request signature.");
 			throw new Error("Couldn't validate the request signature.");
 			
 		}
