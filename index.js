@@ -258,7 +258,7 @@ var graphapi = request.defaults({
 function verifyRequestSignature(req, res, buf) {
 	var signatureHash = req.headers['x-hub-signature'];
 console.log('inside validate signatire');
-	if (!signature) {
+	if (!signatureHash) {
 		// For testing, let's log an error. In production, you should throw an error.
 		console.error("Couldn't validate the signature.");
 		console.log("Couldn't validate the signature");
