@@ -266,12 +266,10 @@ console.log('inside validate signatire');
 		//var elements = signature.split('=');
 		//var signatureHash = elements[1];
 console.log("Signature hash is "+signatureHash);
-console.log("app secret is "+APP_SECRET);
-console.log("Value of buf"+buf);
+console.log("expected hash is "+expectedHash);
 		var expectedHash = crypto.createHmac('sha1', APP_SECRET)
 			.update(buf)
 			.digest('hex');
-console.log("expected hash is "+expectedHash);
 		if (signatureHash != expectedHash) {
 			console.log("Couldn't validate the request signature.");
 			throw new Error("Couldn't validate the request signature.");
