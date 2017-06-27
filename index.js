@@ -23,9 +23,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 //console.log('Port used' + process.env.PORT);
 //app.use(bodyParser.json());
-console.log('Before');
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
-console.log('after');
 //app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true}));
 
@@ -45,10 +43,10 @@ console.log('JSON stringigfy'+JSON.stringify(req.body));
 var body = JSON.parse(JSON.stringify(req.body));
 	console.log('Extracted data is'+body.CurrentMission.MissionId);
 	console.log('Other object array length'+body.OtherMissions.length);
-    req.query("exec insertmission @mission")
-        .param('mission', JSON.stringify(req.body), TYPES.NVarChar)
-        .exec(res);
-	res.status(200).send(req.body);
+    //req.query("exec insertmission @mission")
+   //     .param('mission', JSON.stringify(req.body), TYPES.NVarChar)
+   //     .exec(res);
+res.status(200).send(req.body);
   //res.send(200, req.body);
 });
 
