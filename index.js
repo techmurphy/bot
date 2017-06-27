@@ -36,9 +36,6 @@ app.use(function (req, res, next) {
     req.query = tediousExpress(req, config.get('connection'));
     next();
 });
-app.get('/', function (request, response) {
-	res.status(200);
-}
 	
 app.post("/", function (req, res) {
   //console.log(req.body);
