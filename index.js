@@ -256,15 +256,15 @@ var graphapi = request.defaults({
 });
 
 function verifyRequestSignature(req, res, buf) {
-	var signature = req.headers['x-hub-signature'];
+	var signatureHash = req.headers['x-hub-signature'];
 console.log('inside validate signatire');
 	if (!signature) {
 		// For testing, let's log an error. In production, you should throw an error.
 		console.error("Couldn't validate the signature.");
 		console.log("Couldn't validate the signature");
 	} else {
-		var elements = signature.split('=');
-		var signatureHash = elements[1];
+		//var elements = signature.split('=');
+		//var signatureHash = elements[1];
 console.log("Signature hash is "+signatureHash);
 		var expectedHash = crypto.createHmac('sha1', APP_SECRET)
 			.update(buf)
