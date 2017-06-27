@@ -270,7 +270,6 @@ console.log('inside validate signatire');
 console.log("Signature hash is "+signatureHash);
 console.log("expected hash is "+expectedHash);
 		if (signatureHash != expectedHash) {
-			console.log("Couldn't validate the request signature.");
 			throw new Error("Couldn't validate the request signature.");
 			
 		}
