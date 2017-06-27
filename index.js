@@ -60,6 +60,7 @@ app.use(function (req, res, next) {
     next(err);
 });
 
+/* Databse not to be used
 // List out all the thanks recorded in the database
 //tedious = require('tedious');
 var Connection = require('tedious').Connection;
@@ -103,7 +104,7 @@ console.log('Reading rows from the Table...');
     }
 });
 });
-
+*/
 
 // Handle the webhook subscription request from Facebook
 app.get('/webhook', function(request, response) {
