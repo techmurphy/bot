@@ -49,7 +49,7 @@ var body = JSON.parse(JSON.stringify(req.body));
 res.status(200).send(req.body);
   //res.send(200, req.body);
 });
-
+/*
 //app.use('/mission', require('./routes/mission'));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -57,7 +57,7 @@ app.use(function (req, res, next) {
     err.status = 404;
     next(err);
 });
-
+*/
 
 // List out all the thanks recorded in the database
 //tedious = require('tedious');
