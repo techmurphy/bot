@@ -24,7 +24,7 @@ app.set('port', process.env.PORT || 3000);
 //console.log('Port used' + process.env.PORT);
 //app.use(bodyParser.json());
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
-//app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true}));
 
 //app.use(bodyParser.json({type:'application/vnd.api+json'}));
