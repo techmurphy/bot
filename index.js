@@ -271,8 +271,9 @@ console.log('inside validate signatire');
 			.digest('hex');
 
 		if (signatureHash != expectedHash) {
-			throw new Error("Couldn't validate the request signature.");
 			console.log('Couldn't validate the request signature.');
+			throw new Error("Couldn't validate the request signature.");
+			
 		}
 	}
 }
