@@ -52,15 +52,7 @@ var body = JSON.parse(JSON.stringify(req.body));
 res.status(200).send(req.body);
   //res.send(200, req.body);
 });
-/*
-//app.use('/mission', require('./routes/mission'));
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found: '+ req.method + ":" + req.originalUrl);
-    err.status = 404;
-    next(err);
-});
-*/
+
 
 // List out all the thanks recorded in the database
 //tedious = require('tedious');
@@ -89,8 +81,8 @@ console.log('Reading rows from the Table...');
 				response.send('Number of rows returned: '+rowCount);
 				//request.on('done',function(rowCount, more, rows){
         			//console.log(rows+'is returned'); // not empty
-				//response.render('pages/thanks.ejs', {results: rows} );
-				//});
+				response.render('pages/thanks.ejs', {results: rows} );
+				});
 			}     
         }
     );
