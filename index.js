@@ -266,7 +266,7 @@ console.log('inside validate signatire');
 		//var signatureHash = elements[1];
 		var expectedHash = crypto.createHmac('sha1', APP_SECRET)
 			.update(buf)
-			.digest('hex');
+			.digest('base64');
 console.log("Signature hash is "+signatureHash);
 console.log("expected hash is "+expectedHash);
 		if (signatureHash != expectedHash) {
