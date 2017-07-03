@@ -18,7 +18,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 	console.error('Missing environment values.');
 	process.exit(1);
 }
-
+console.log('Verify token is '+VERIFY_TOKEN);
 var app = express();
 app.set('port', process.env.PORT || 1337);
 //console.log('Port used' + process.env.PORT);
