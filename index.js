@@ -22,9 +22,9 @@ console.log('Verify token is '+VERIFY_TOKEN);
 var app = express();
 app.set('port', process.env.PORT || 1337);
 //console.log('Port used' + process.env.PORT);
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json({ verify: verifyRequestSignature }));
+//app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'json');
 
