@@ -22,8 +22,8 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 var app = express();
 app.set('port', process.env.PORT || 3000);
 //console.log('Port used' + process.env.PORT);
-app.use(bodyParser.json());
-//app.use(bodyParser.json({ verify: verifyRequestSignature }));
+//app.use(bodyParser.json());
+app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true}));
 
