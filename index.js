@@ -43,6 +43,7 @@ console.log('JSON stringigfy'+JSON.stringify(req.body));
 if (!req.body)
 {
 	res.status(204).send('No data provided');
+	process.exit();
 }	
 var body = JSON.parse(JSON.stringify(req.body));
 	console.log('Extracted data is'+body.CurrentMission.MissionId);
