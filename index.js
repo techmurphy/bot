@@ -20,7 +20,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 }
 
 var app = express();
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 1337);
 //console.log('Port used' + process.env.PORT);
 //app.use(bodyParser.json());
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
