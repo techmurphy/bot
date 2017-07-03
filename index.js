@@ -40,6 +40,10 @@ app.use(function (req, res, next) {
 app.post("/", function (req, res) {
   //console.log(req.body);
 console.log('JSON stringigfy'+JSON.stringify(req.body));
+if (req.body is null)
+{
+	res.status(204).send('No data provided');
+}	
 var body = JSON.parse(JSON.stringify(req.body));
 	console.log('Extracted data is'+body.CurrentMission.MissionId);
 	console.log('Other object array length'+body.OtherMissions.length);
