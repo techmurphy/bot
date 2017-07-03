@@ -40,7 +40,7 @@ app.use(function (req, res, next) {
 app.post("/", function (req, res) {
   //console.log(req.body);
 console.log('JSON stringigfy'+JSON.stringify(req.body));
-if (!req.body)
+if (req.body = '{}')
 {
 	console.log('No re quest body');
 	res.status(204).send('No data provided');
