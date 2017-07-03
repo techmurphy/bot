@@ -42,6 +42,7 @@ app.post("/", function (req, res) {
 console.log('JSON stringigfy'+JSON.stringify(req.body));
 if (!req.body)
 {
+	console.log('No re quest body');
 	res.status(204).send('No data provided');
 	process.exit();
 }	
