@@ -1,4 +1,4 @@
-/*const express = require('express');
+const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
 
@@ -21,8 +21,8 @@ app.get('/webhook', function(req, res) {
 });
 
 app.listen(3000);
-*/
 
+/*
 const 
 	crypto = require('crypto'),
 	express = require('express'),
@@ -295,3 +295,4 @@ console.log("expected hash is "+expectedHash);
 		}
 	}
 }
+*/
