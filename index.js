@@ -8,7 +8,7 @@ console.log('TRace 1');
 const app = express();
 app.use(bodyParser.json());
 
-
+console.log('TRace 2');
 app.get('/webhook', (req, res) => {
 	console.log('The value if verify token is '+req.query['hub.verify_token']);
 console.log(' the value of challenge is '+req.query['hub.challenge']);
