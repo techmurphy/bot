@@ -127,7 +127,7 @@ console.log('Reading rows from the Table...');
 // Handle the webhook subscription request from Facebook
 app.get('/webhook', function(req, res) {
 	console.log(req.query['hub.mode']);
-	console.log(re.query['hub.verify_token']);
+	console.log(req.query['hub.verify_token']);
 	if (req.query['hub.mode'] === 'subscribe' &&
 		req.query['hub.verify_token'] === VERIFY_TOKEN) {
 		console.log('Validated webhook');
