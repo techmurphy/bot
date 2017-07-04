@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 
 console.log('TRace 2');
-app.get('/', (request, res) => {
+app.get('/', (request, res) {
 	console.log('The value if verify token is '+request.query['hub.verify_token']);
 console.log(' the value of challenge is '+request.query['hub.challenge']);
 	
