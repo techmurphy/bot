@@ -3,20 +3,21 @@ const request = require('request');
 const bodyParser = require('body-parser');
 
 let pageToken = process.env.APP_PAGE_TOKEN;
-const verifyToken = process.env.APP_VERIFY_TOKEN;
+const verifyToken = process.env.VERIFY_TOKEN;
 console.log('TRace 1');
 const app = express();
 app.use(bodyParser.json());
 
 console.log('TRace 2');
-app.get('/webhook',function (request, res) {
-	console.log('The value if verify token is '+request.query['hub.verify_token']);
-console.log(' the value of challenge is '+request.query['hub.challenge']);
-	
-    if (request.query['hub.verify_token'] === verifyToken) {
-        return res.send(request.query['hub.challenge']);
-    }
-    res.send('Error, wrong validation token');
+app.get('/webhook', function(req, res) {
+  if (req.query['hub.mode'] === 'subscribe' &&
+      req.query['hub.verify_token'] === verifyToken) {
+    console.log("Validating webhook");
+    res.status(200).send(req.query['hub.challenge']);
+  } else {
+    console.error("Failed validation. Make sure the validation tokens match.");
+    res.sendStatus(403);          
+  }  
 });
 
 app.listen(3000);
