@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 
 console.log('TRace 2');
-app.get('/webhook', function(req, res) {
+/*app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === verifyToken) {
     console.log("Validating webhook");
@@ -18,7 +18,23 @@ app.get('/webhook', function(req, res) {
     console.error("Failed validation. Make sure the validation tokens match.");
     res.sendStatus(403);          
   }  
+});*/
+
+// Handle the webhook subscription request from Facebook
+app.get('/webhook', function(req, res) {
+	console.log(req.query['hub.mode']);
+	console.log(req.query['hub.verify_token']);
+	if (req.query['hub.mode'] === 'subscribe' &&
+		req.query['hub.verify_token'] === VERIFY_TOKEN) {
+		console.log('Validated webhook');
+		res.status(200).send(req.query['hub.challenge']);
+	} else {
+		console.log('INside else');
+		console.error('Failed validation. Make sure the validation tokens match.');
+		res.sendStatus(403);          
+	}
 });
+
 
 app.listen(3000);
 
