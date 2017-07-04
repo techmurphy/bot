@@ -266,7 +266,6 @@ console.log("Signature hash is "+signatureHash);
 console.log("expected hash is "+expectedHash);
 		if (signatureHash != expectedHash) {
 			throw new Error("Couldn't validate the request signature.");
-			
 		}
 	}
 }
