@@ -1,3 +1,25 @@
+const express = require('express');
+const request = require('superagent');
+const bodyParser = require('body-parser');
+
+let pageToken = process.env.APP_PAGE_TOKEN;
+const verifyToken = process.env.APP_VERIFY_TOKEN;
+console.log('TRace 1');
+const app = express();
+app.use(bodyParser.json());
+
+app.get('/webhook', (req, res) => {
+    if (req.query['hub.verify_token'] === verifyToken) {
+        return res.send(req.query['hub.challenge']);
+    }
+    res.send('Error, wrong validation token');
+});
+
+app.listen(3000);
+
+
+/*
+
 const 
 	crypto = require('crypto'),
 	express = require('express'),
@@ -270,3 +292,6 @@ console.log("expected hash is "+expectedHash);
 		}
 	}
 }
+
+
+*/
