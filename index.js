@@ -22,9 +22,9 @@ console.log('Verify token is '+VERIFY_TOKEN);
 var app = express();
 app.set('port', process.env.PORT || 3000);
 //console.log('Port used' + process.env.PORT);
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
-//app.use(bodyParser.json({ verify: verifyRequestSignature }));
+app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'json');
 
@@ -35,7 +35,7 @@ app.use(function (req, res, next) {
 });
 	
 app.post("/", function (req, res) {
-  //console.log(req.body);
+  console.log(req.body);
 console.log('JSON stringigfy'+JSON.stringify(req.body));
 if (req.body = '{}')
 {
@@ -101,8 +101,8 @@ console.log('Reading rows from the Table...');
 
 // Handle the webhook subscription request from Facebook
 app.get('/webhook', function(req, res) {
-	console.log(req.query['hub.mode']);
-	console.log(req.query['hub.verify_token']);
+	console.log('The hub mode is '+req.query['hub.mode']);
+	console.log('The hub verify token is '+req.query['hub.verify_token']);
 	if (req.query['hub.mode'] === 'subscribe' &&
 		req.query['hub.verify_token'] === VERIFY_TOKEN) {
 		console.log('Validated webhook');
