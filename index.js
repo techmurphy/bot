@@ -7,10 +7,12 @@ const verifyToken = process.env.APP_VERIFY_TOKEN;
 console.log('TRace 1');
 const app = express();
 app.use(bodyParser.json());
-console.log(req.query['hub.verify_token']);
-console.log(req.query['hub.challenge']);
+
 
 app.get('/webhook', (req, res) => {
+	console.log(req.query['hub.verify_token']);
+console.log(req.query['hub.challenge']);
+	
     if (req.query['hub.verify_token'] === verifyToken) {
         return res.send(req.query['hub.challenge']);
     }
