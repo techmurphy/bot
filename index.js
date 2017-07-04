@@ -125,17 +125,17 @@ console.log('Reading rows from the Table...');
 
 
 // Handle the webhook subscription request from Facebook
-app.get('/webhook', function(request, response) {
-	console.log(request.query['hub.mode']);
-	console.log(request.query['hub.verify_token']);
-	if (request.query['hub.mode'] === 'subscribe' &&
-		request.query['hub.verify_token'] === VERIFY_TOKEN) {
+app.get('/webhook', function(req, res) {
+	console.log(req.query['hub.mode']);
+	console.log(re.query['hub.verify_token']);
+	if (req.query['hub.mode'] === 'subscribe' &&
+		req.query['hub.verify_token'] === VERIFY_TOKEN) {
 		console.log('Validated webhook');
-		response.status(200).send(request.query['hub.challenge']);
+		res.status(200).send(req.query['hub.challenge']);
 	} else {
 		console.log('INside else');
 		console.error('Failed validation. Make sure the validation tokens match.');
-		response.sendStatus(403);          
+		res.sendStatus(403);          
 	}
 });
 
