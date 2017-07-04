@@ -1,5 +1,5 @@
 const express = require('express');
-const request = require('superagent');
+const request = require('request');
 const bodyParser = require('body-parser');
 
 let pageToken = process.env.APP_PAGE_TOKEN;
@@ -9,12 +9,12 @@ const app = express();
 app.use(bodyParser.json());
 
 console.log('TRace 2');
-app.get('/webhook', (req, res) => {
-	console.log('The value if verify token is '+req.query['hub.verify_token']);
-console.log(' the value of challenge is '+req.query['hub.challenge']);
+app.get('/webhook', (request, res) => {
+	console.log('The value if verify token is '+request.query['hub.verify_token']);
+console.log(' the value of challenge is '+request.query['hub.challenge']);
 	
-    if (req.query['hub.verify_token'] === verifyToken) {
-        return res.send(req.query['hub.challenge']);
+    if (request.query['hub.verify_token'] === verifyToken) {
+        return res.send(request.query['hub.challenge']);
     }
     res.send('Error, wrong validation token');
 });
