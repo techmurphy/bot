@@ -10,8 +10,8 @@ app.use(bodyParser.json());
 
 
 app.get('/webhook', (req, res) => {
-	console.log(req.query['hub.verify_token']);
-console.log(req.query['hub.challenge']);
+	console.log('The value if verify token is '+req.query['hub.verify_token']);
+console.log(' the value of challenge is '+req.query['hub.challenge']);
 	
     if (req.query['hub.verify_token'] === verifyToken) {
         return res.send(req.query['hub.challenge']);
