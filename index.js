@@ -101,7 +101,6 @@ console.log('Reading rows from the Table...');
 
 // Handle the webhook subscription request from Facebook
 app.get('/webhook', function(req, res) {
-	res.sendStatus(200);
 	console.log('The hub mode is '+req.query['hub.mode']);
 	console.log('The hub verify token is '+req.query['hub.verify_token']);
 	if (req.query['hub.mode'] === 'subscribe' &&
@@ -114,6 +113,7 @@ app.get('/webhook', function(req, res) {
 		res.sendStatus(403);          
 	}
 });
+
 
 // Handle webhook payloads from Facebook
 /*app.post('/webhook', function(request, response) {
