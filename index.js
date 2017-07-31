@@ -116,7 +116,7 @@ app.get('/webhook', function(req, res) {
 });
 
 // Handle webhook payloads from Facebook
-app.post('/webhook', function(request, response) {
+/*app.post('/webhook', function(request, response) {
 	if(request.body && request.body.entry) {
 		request.body.entry.forEach(function(entry){
 			entry.changes.forEach(function(change){
@@ -235,7 +235,7 @@ app.post('/webhook', function(request, response) {
 			});
 		});
 	}
-});
+});*/
 
 
 app.listen(app.get('port'), function() {
