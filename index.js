@@ -61,7 +61,7 @@ var Request = require('tedious').Request;
 
 var connection = new Connection(config.get('connection'));
 
-app.get('/', function (request, response) {
+/*app.get('/', function (request, response) {
 // Attempt to connect and execute queries if connection goes through
 connection.on('connect', function(err) {
     if (err) {
@@ -96,7 +96,7 @@ console.log('Reading rows from the Table...');
 	
     }
 });
-});
+});*/
 
 
 // Handle the webhook subscription request from Facebook
