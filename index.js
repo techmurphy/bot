@@ -8,6 +8,7 @@ const
         config = require('config'),
         tediousExpress = require('express4-tedious'),
 	TYPES = require('tedious').TYPES;
+var http = require('http');
 const
 	VERIFY_TOKEN = process.env.VERIFY_TOKEN,
 	ACCESS_TOKEN = process.env.ACCESS_TOKEN,
@@ -20,7 +21,7 @@ if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN && DATABASE_URL)) {
 }
 console.log('Verify token is '+VERIFY_TOKEN);
 var app = express();
-app.set('port', process.env.PORT || 3000);
+http.createServer(app).listen(process.env.PORT || 8080);
 //console.log('Port used' + process.env.PORT);
 //app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
