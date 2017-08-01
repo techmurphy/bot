@@ -3,7 +3,7 @@ var TYPES = require('tedious').TYPES;
 console.log('Inside the mission js file');
 
 
-router.get('/webhook',function (req, res) {
+router.get('/',function (req, res) {
     req.query("select * from mission for json path")
         .into(res, '[]');
 });
