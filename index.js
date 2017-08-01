@@ -61,7 +61,7 @@ var Request = require('tedious').Request;
 
 var connection = new Connection(config.get('connection'));
 
-/*app.get('/', function (request, response) {
+app.get('/', function (request, response) {
 // Attempt to connect and execute queries if connection goes through
 connection.on('connect', function(err) {
     if (err) {
@@ -96,7 +96,7 @@ console.log('Reading rows from the Table...');
 	
     }
 });
-});*/
+});
 
 
 // Handle the webhook subscription request from Facebook
@@ -116,7 +116,7 @@ app.get('/webhook', function(req, res) {
 
 
 // Handle webhook payloads from Facebook
-/*app.post('/webhook', function(request, response) {
+app.post('/webhook', function(request, response) {
 	if(request.body && request.body.entry) {
 		request.body.entry.forEach(function(entry){
 			entry.changes.forEach(function(change){
@@ -235,7 +235,7 @@ app.get('/webhook', function(req, res) {
 			});
 		});
 	}
-});*/
+});
 
 
 app.listen(app.get('port'), function() {
